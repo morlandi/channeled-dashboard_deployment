@@ -1,0 +1,9 @@
+[servers:children]
+demo1
+demo2
+
+[demo1]
+channeled-dashboard-demo1.brainstorm.it     username=demo1
+
+[demo2]
+channeled-dashboard-demo2.brainstorm.it     username=demo2

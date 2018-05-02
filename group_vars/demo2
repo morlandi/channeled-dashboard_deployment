@@ -1,0 +1,6 @@
+---
+nickname: demo2
+version: channels2
+apt_update_cache: False
+virtualenv_python: 'python3.6'
+standalone_host: False

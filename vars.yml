@@ -1,0 +1,68 @@
+skip_python36: false
+skip_ngix: false
+skip_redis_server: false
+skip_supervisor: false
+
+
+usergroup: '{{username}}'
+home: '/home/{{username}}'
+project_name: "dashboard"
+project_instance: "{{username}}"
+locale: en_US.UTF-8
+
+#
+# Provisioning variables
+#
+
+
+system_packages:
+    - unzip
+    - git
+
+project_packages:
+
+    # General
+    - python-pip
+    - python-virtualenv
+    #- python3-dev
+    - python3.6-dev
+    - python3.6-venv
+
+
+#
+# Deployment variables
+#
+
+project:
+    root: "{{home}}"
+    website_root: "{{home}}/{{project_name}}"
+    website_home: "{{home}}/{{project_name}}/dashboard"
+    settings_file: "{{home}}/{{project_name}}/dashboard/dashboard/settings.py"
+    repo: https://github.com/morlandi/channeled-dashboard.git
+    virtualenv: "{{home}}/python"
+    pythonpath: "{{home}}/python/bin"
+    secret_key: "-yg*!4gv_db7o+1s0&&xbx(ekcal9eei_@tc-yc=g1=(8g=5j$"
+    session_cookie_name: '{{project_instance}}_sid'
+    site_name: 'channeled-dashboard'
+    server_email: 'support@brainstorm.it'
+    admins:
+        -
+            - 'Support'
+            - 'support@brainstorm.it'
+    default_from_email: 'support@brainstorm.it'
+    email_subject_prefix: '[channeled-dashboard] '
+    static_root: "{{home}}/public/static"
+    media_root: "{{home}}/public/media"
+    socketpath: "{{home}}/run"
+    logto: "{{home}}/logs"
+
+    management_commands:
+        -
+            - migrate
+            - collectstatic
+            #- compress
+
+supervised_services:
+    -
+        - "{{project_instance}}_asgi_server"
+        - "{{project_instance}}_asgi_worker"

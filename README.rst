@@ -22,13 +22,13 @@ Usage
 Provisioning (run this only once per server)
 --------------------------------------------
 
-$ ansible-playbook -v -i hosts provisioning.yml demo1
+$ ansible-playbook -v -i hosts provisioning.yml --limit demo1
 
 
 Deployment (run this for every instance)
 ----------------------------------------
 
-$ ansible-playbook -v -i hosts deployment.yml demo1
+$ ansible-playbook -v -i hosts deployment.yml
 
 
 Fix Ubuntu 16.04 LTS doesn't come with certain modules, required by ansible
